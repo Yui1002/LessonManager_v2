@@ -3,7 +3,7 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 // import axios from "axios";
 // import Profile from "./Profile.jsx";
 // import Schedule from "./Schedule.jsx";
-// import Login from "./Login.jsx";
+import Login from "./components/Login";
 // import Register from "./Register.jsx";
 // import Home from "./Home.jsx";
 import Entry from "./components/Entry";
@@ -32,7 +32,7 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Entry />} />
-      {/* <Route path="/login" element={<Login />} /> */}
+      <Route path="/login" element={<Login />} />
       {/* <Route path="/register" element={<Register />} /> */}
       {/* <Route
         path="/mainPage"
