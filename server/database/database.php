@@ -7,10 +7,10 @@ class Database {
     private $connection;
 
     private function __construct() {
-        $host = DB_HOST;
-        $user = DB_USER;
-        $password = DB_PASS;
-        $database = DB_DATABASE;
+        $host = $_ENV['DB_HOST'];
+        $user = $_ENV['DB_USER'];
+        $password = $_ENV['DB_PASS'];
+        $database = $_ENV['DB_DATABASE'];
 
         try {
             $connection = new PDO("mysql:host=$host;dbname=$database", $user, $password);

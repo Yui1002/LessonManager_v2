@@ -18,13 +18,11 @@ const Login = () => {
   }, [isLoggedIn, navigate]);
 
   const submitLogin = (e) => {
-    e.preventDefault();
-
     axios
       .post(`${config.BASE_PATH}login`, { username, password })
       .then((data) => {
         setIsLoggedIn(true);
-        navigate("/mainPage")
+        navigate("/mainPage");
       })
       .catch((err) => {
         setIsLoggedIn(false);
@@ -34,7 +32,7 @@ const Login = () => {
 
   return (
     <div className="login_container">
-      <form onSubmit={submitLogin} className="login_form">
+      <div className="login_form">
         <h1 className="login_title">Log in</h1>
         <section className="login_section_username">
           <label htmlFor="username">Username</label>
@@ -65,7 +63,7 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </section>
-        <button type="submit" value="Sign in" className="login_button">
+        <button className="login_button" onClick={submitLogin}>
           Log in
         </button>
         {loginError && <p>We cannot find an account with that information</p>}
@@ -76,7 +74,7 @@ const Login = () => {
         >
           Register
         </button>
-      </form>
+      </div>
     </div>
   );
 };
