@@ -1,6 +1,9 @@
 <?php
 
-include_once "config.php";
+namespace App\Database;
+
+use PDO;
+use PDOException;
     
 class Database {
     private static $instance = null;
@@ -13,19 +16,20 @@ class Database {
         $database = $_ENV['DB_DATABASE'];
 
         try {
-            $connection = new PDO("mysql:host=$host;dbname=$database", $user, $password);
-            $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            echo "Connected successfully";
+            $this->connection = new PDO(
+                "mysql:host=$host;dbname=$database", $user, $password
+            );
+            $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch(PDOException $e) {
-            echo "Connection failed: " . $e->getMessage();
+            die("Connection failed: ". $e->getMessage());
         }
     }
 
-    public static function getInstance() {
-        if (self::$instance == null) {
+    public static function getInstance() 
+    {
+        if (self::$instance === null) {
             self::$instance = new Database();
         }
-
         return self::$instance;
     }
 
