@@ -13,7 +13,8 @@ class AuthManager
         
     }
 
-    public function login(Request $request) {
+    public function login(Request $request) 
+    {
         $username = $request->get("username");
         $password = $request->get("password");
 
@@ -23,12 +24,26 @@ class AuthManager
             throw new HttpException(400, "Incorrect username or password");
         }
 
-        $hashed = password_hash($user["password"], PASSWORD_BCRYPT);
-        $doesPasswordMatch = password_verify($password, $hashed);
+        $doesPasswordMatch = password_verify($password, $user["password"]);
         if (!$doesPasswordMatch) {
             throw new HttpException(400, "Incorrect username or password");
         }
 
         return $user;
+    }
+
+    public function register(Request $request) 
+    {
+        $username = $request->get("username");
+        $password = $request->get("password");
+
+        $user = $this->authRepository->findByUsername($username);
+
+        if ($user) {
+            throw new HttpException(400, "User already registered");
+        }
+
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        $this->authRepository->register($username, $hashedPassword);
     }
 }

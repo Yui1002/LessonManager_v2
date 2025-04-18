@@ -21,6 +21,6 @@ class AuthController extends Controller {
 
     public function register(Request $request)
     {
-        
+        $user = $this->authManager->register($request);
     }
 }
