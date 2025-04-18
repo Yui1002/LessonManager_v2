@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Managers\AuthManager;
 
-class AuthController extends Controller {
+class AuthController {
     private $authManager;
 
     public function __construct() 
@@ -27,6 +27,13 @@ class AuthController extends Controller {
 
     public function login(Request $request) 
     {
+        if ($request->session()->has('user')) {
+            return response()->json([
+                'message' => 'Already logged in',
+                'user'=> $request->session()->get('user')
+            ]);
+        };
+
         $user = $this->authManager->login($request);
         $request->session()->put('user', $user);
 

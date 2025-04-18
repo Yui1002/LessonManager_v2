@@ -22,3 +22,5 @@ yarn-error.log
 /.vscode
 /vscode
 /.zed
+lesson_manager
+public/phpinfo.php

@@ -5,7 +5,7 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 // import Schedule from "./Schedule.jsx";
 import Login from "./components/Login";
 // import Register from "./Register.jsx";
-// import Home from "./Home.jsx";
+import Home from "./components/Home";
 import Entry from "./components/Entry";
 // import PastClass from "./PastClass.jsx";
 // import "./App.css";
@@ -29,15 +29,15 @@ const App = () => {
   //     });
   // };
 
-  return (
+  return ( 
     <Routes>
       <Route path="/" element={<Entry />} />
       <Route path="/login" element={<Login />} />
       {/* <Route path="/register" element={<Register />} /> */}
-      {/* <Route
+      <Route
         path="/mainPage"
-        element={<Home checkLogin={checkLogin} isLoggedIn={isLoggedIn} />}
-      /> */}
+        element={<Home />}
+      />
       {/* <Route
         path="/profile"
         element={<Profile checkLogin={checkLogin} isLoggedIn={isLoggedIn} />}

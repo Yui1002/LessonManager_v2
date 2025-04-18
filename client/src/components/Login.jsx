@@ -8,24 +8,28 @@ const Login = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loginError, setLoginError] = useState(false);
 
   useEffect(() => {
-    if (isLoggedIn) {
-      navigate("/mainPage");
-    }
-  }, [isLoggedIn, navigate]);
+    axios.get(`${config.BASE_PATH}checkSession`)
+    .then((res) => {
+      if (res.data.loggedIn) {
+        navigate('/mainPage')
+      }
+    })
+    .catch((err) => {
+      console.log("Session check fail", err)
+    })
+  }, [navigate])
 
-  const submitLogin = (e) => {
+  const submitLogin = () => {
     axios
       .post(`${config.BASE_PATH}login`, { username, password })
       .then((data) => {
-        setIsLoggedIn(true);
         navigate("/mainPage");
       })
       .catch((err) => {
-        setIsLoggedIn(false);
+        console.log('err', err)
         setLoginError(true);
       });
   };
