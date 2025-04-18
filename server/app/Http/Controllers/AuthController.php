@@ -15,7 +15,12 @@ class AuthController extends Controller {
 
     public function login(Request $request) 
     {
-        $username = $request->input('username');  
-        return response("Hello World", 200);
+        $user = $this->authManager->login($request);
+        return response()->json($user);
+    }
+
+    public function register(Request $request)
+    {
+        
     }
 }
