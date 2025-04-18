@@ -20,4 +20,10 @@ class AuthRepository {
         $user = $stmt->fetch();
         return $user;
     }
+
+    public function register($username, $password) {
+        $sql = "INSERT INTO users (username, password) VALUES (?,?);";
+        $stmt = $this->db->getConnection()->prepare($sql);
+        $stmt->execute([$username, $password]);
+    }    
 }
