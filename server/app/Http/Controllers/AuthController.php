@@ -13,8 +13,11 @@ class AuthController {
         $this->authManager = new AuthManager();
     }
 
-    public function checkSession(Request $request)
+    public function checkIfLoggedIn(Request $request)
     {
+        \Log::info('Session Data:', $request->session()->all());
+        \Log::info('Session ID:', ['id' => session()->getId()]);
+
         if ($request->session()->has("user")) {
             return response()->json([
                 'loggedIn' => true,
@@ -27,15 +30,11 @@ class AuthController {
 
     public function login(Request $request) 
     {
-        if ($request->session()->has('user')) {
-            return response()->json([
-                'message' => 'Already logged in',
-                'user'=> $request->session()->get('user')
-            ]);
-        };
-
+        // \Log::info('User logged in:', ['user' => $request->session()->get('user')]);
+        // \Log::info('Session Data After Login:', $request->session()->all());
         $user = $this->authManager->login($request);
         $request->session()->put('user', $user);
+        
 
         return response()->json($user);
     }
