@@ -6,26 +6,28 @@ import "../styles/Login.css";
 
 const Login = () => {
   const navigate = useNavigate();
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loginError, setLoginError] = useState(false);
 
-  useEffect(() => {
-    if (isLoggedIn) {
-      navigate("/mainPage");
-    }
-  }, [isLoggedIn, navigate]);
+  const submitLogin = (event) => {
+    event.preventDefault();
 
-  const submitLogin = (e) => {
+    const form = new FormData(event.currentTarget);
+    const username = form.get("username") || "";
+    const password = form.get("password") || "";
+
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
+
     axios
-      .post(`${config.BASE_PATH}login`, { username, password })
+      .post(`${config.BASE_PATH}login`, 
+        { username, password },
+        { withCredentials: true }
+      )
       .then((data) => {
-        setIsLoggedIn(true);
+        console.log('login data', data)
         navigate("/mainPage");
       })
       .catch((err) => {
-        setIsLoggedIn(false);
+        console.log("err", err);
         setLoginError(true);
       });
   };
@@ -34,38 +36,21 @@ const Login = () => {
     <div className="login_container">
       <div className="login_form">
         <h1 className="login_title">Log in</h1>
-        <section className="login_section_username">
-          <label htmlFor="username">Username</label>
-          <br />
-          <input
-            id="username"
-            name="username"
-            type="text"
-            autoComplete="username"
-            required
-            autoFocus
-            value={username}
-            className="login_input_username"
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </section>
-        <section className="login_section_password">
-          <label htmlFor="current-password">Password</label>
-          <br />
-          <input
-            id="current-password"
-            name="password"
-            type="password"
-            autoComplete="current-password"
-            required
-            className="login_input_password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </section>
-        <button className="login_button" onClick={submitLogin}>
-          Log in
-        </button>
+        <form onSubmit={submitLogin}>
+          <section className="login_section_username">
+            <label>
+              username:
+              <input type="text" name="username" defaultValue="" required />
+            </label>
+          </section>
+          <section className="login_section_password">
+            <label>
+              password:
+              <input type="password" name="password" defaultValue="" required />
+            </label>
+          </section>
+          <input className="login_button" type="submit" value="submit" />
+        </form>
         {loginError && <p>We cannot find an account with that information</p>}
         New user?{" "}
         <button

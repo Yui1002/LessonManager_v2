@@ -20,12 +20,7 @@ class AuthManager
 
         $user = $this->authRepository->findByUsername($username);
 
-        if ($user === false) {
-            throw new HttpException(400, "Incorrect username or password");
-        }
-
-        $doesPasswordMatch = password_verify($password, $user["password"]);
-        if (!$doesPasswordMatch) {
+        if (!$user || !password_verify($password, $user["password"])) {
             throw new HttpException(400, "Incorrect username or password");
         }
 
