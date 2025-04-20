@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Managers\AuthManager;
 
+\Log::info('CORS headers applied');
+
 class AuthController {
     private $authManager;
 

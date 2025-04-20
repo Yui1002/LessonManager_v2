@@ -8,10 +8,9 @@ const Entry = () => {
   const navigate = useNavigate();
 
   const checkIfLoggedIn = async () => {
-    console.log('clicked!')
     try {
       const res = await axios.get(`${config.BASE_PATH}checkIfLoggedIn`, {
-        withCredentials: true,
+        withCredentials: true
       });
       console.log('data', res)
       if (res.data.loggedIn) {
