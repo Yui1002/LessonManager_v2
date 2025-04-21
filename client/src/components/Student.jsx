@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import EditProfile from "./EditProfile.jsx";
 import {
   Card,
   CardHeader,
@@ -12,16 +11,16 @@ import "../styles/Student.css";
 import DeleteSharpIcon from "@mui/icons-material/DeleteSharp";
 import EditSharpIcon from "@mui/icons-material/EditSharp";
 import Dialog from "./Dialog";
+import EditProfile from "./EditProfile";
 
 const Student = ({ student }) => {
-  const [openDialog, setOpenDialog] = useState(false);
+  const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
+  const [openEditDialog, setOpenEditDialog] = useState(false);
 
-  const handleOpen = () => setOpen(true);
-  const handleDialogClose = () => setOpenDialog(false);
+  const handleDeleteDialogClose = () => setOpenDeleteDialog(false);
+  const handleEditDialogClose = () => setOpenEditDialog(false);
 
-  const deleteStudent = () => {
-    
-  }
+  const deleteStudent = () => {};
 
   return (
     <Card>
@@ -52,19 +51,25 @@ const Student = ({ student }) => {
         </Typography>
       </CardContent>
       <CardActions>
-        <DeleteSharpIcon onClick={() => setOpenDialog(true)} />
-        <EditSharpIcon onClick={handleOpen} />
+        <DeleteSharpIcon onClick={() => setOpenDeleteDialog(true)} />
+        <EditSharpIcon onClick={() => setOpenEditDialog(true)} />
       </CardActions>
 
       <Dialog
-        open={openDialog}
-        onClose={handleDialogClose}
+        open={openDeleteDialog}
+        onClose={handleDeleteDialogClose}
         title={"Delete Student"}
         message={`Are you sure you want to delete ${student.first_name}?`}
         actions={[
-          { label: "Cancel", onClick: handleDialogClose },
-          { label: "Delete", onClick: deleteStudent }
+          { label: "Cancel", onClick: handleDeleteDialogClose },
+          { label: "Delete", onClick: deleteStudent },
         ]}
+      />
+
+      <EditProfile
+        open={openEditDialog}
+        onClose={handleEditDialogClose}
+        student={student}
       />
     </Card>
   );

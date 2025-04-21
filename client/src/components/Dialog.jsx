@@ -16,7 +16,11 @@ const Dialog = ({ open, onClose, title, message, actions }) => {
     >
       <DialogTitle>{title}</DialogTitle>
       <DialogContent>
-        <DialogContentText>{message}</DialogContentText>
+        {typeof message === "string" ? (
+          <DialogContentText>{message}</DialogContentText>
+        ) : (
+          message
+        )}
       </DialogContent>
       <DialogActions>
         {actions.map((action, index) => (
