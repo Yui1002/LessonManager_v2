@@ -1,9 +1,23 @@
+import { useState } from "react";
 import Dialog from "./Dialog";
 import { TextField } from "@mui/material";
+import axios from 'axios';
+import { config } from "../config";
 
 const EditProfile = ({ open, onClose, student }) => {
-  const saveProfile = () => {
+  const [formData, setFormData] = useState({
+    first_name: student.first_name,
+    last_name: student.last_name,
+    email: student.email,
+    
+  });
 
+  const saveProfile = async () => {
+    try {
+        await axios.put(`${config.BASE_PATH}/`)
+    } catch (err) {
+
+    }
   }
 
   const handleChange = () => {

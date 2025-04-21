@@ -31,4 +31,8 @@ class StudentRepository
         }, $rows);
         return $students;
     }   
+
+    public function updateStudent() {
+        
+    }
 }

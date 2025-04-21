@@ -26,8 +26,8 @@ class StudentController extends Controller
 
     }
 
-    public function update() {
-
+    public function updateStudent() {
+        
     }
 
     public function delete() {

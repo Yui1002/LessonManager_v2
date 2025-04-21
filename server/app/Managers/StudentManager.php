@@ -26,7 +26,7 @@ class StudentManager
 
     }
 
-    public function update() {
+    public function updateStudent() {
 
     }
 

@@ -20,4 +20,6 @@ Route::middleware([CheckAuthorization::class])->group(function () {
     // students
     Route::get('/students', [StudentController::class, 'getStudents']);
     Route::get('/students/{id}', [StudentController::class, 'getStudentById']);
+    Route::post('/student', [StudentController::class, 'createStudent']);
+    Route::put('/student', [StudentController::class, 'updateStudent']);    
 });
