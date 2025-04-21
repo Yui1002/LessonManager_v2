@@ -7,21 +7,21 @@ import {
   CardContent,
   Avatar,
   Typography,
-  Modal,
 } from "@mui/material";
 import "../styles/Student.css";
 import DeleteSharpIcon from "@mui/icons-material/DeleteSharp";
 import EditSharpIcon from "@mui/icons-material/EditSharp";
+import Dialog from "./Dialog";
 
 const Student = ({ student }) => {
-  const [open, setOpen] = useState(false);
+  const [openDialog, setOpenDialog] = useState(false);
 
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleDialogClose = () => setOpenDialog(false);
 
   const deleteStudent = () => {
-    alert("Are you sure to delete the student?")
-  };
+    
+  }
 
   return (
     <Card>
@@ -52,9 +52,20 @@ const Student = ({ student }) => {
         </Typography>
       </CardContent>
       <CardActions>
-        <DeleteSharpIcon onClick={deleteStudent} />
+        <DeleteSharpIcon onClick={() => setOpenDialog(true)} />
         <EditSharpIcon onClick={handleOpen} />
       </CardActions>
+
+      <Dialog
+        open={openDialog}
+        onClose={handleDialogClose}
+        title={"Delete Student"}
+        message={`Are you sure you want to delete ${student.first_name}?`}
+        actions={[
+          { label: "Cancel", onClick: handleDialogClose },
+          { label: "Delete", onClick: deleteStudent }
+        ]}
+      />
     </Card>
   );
 };
