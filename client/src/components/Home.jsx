@@ -10,42 +10,39 @@ import { config } from '../config';
 
 const Home = (props) => {
   // console.log("home props: ", props);
-  // const navigate = useNavigate();
-  // const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
   // const [classScheduledIn1hour, setClassScheduledIn1hour] = useState([]);
 
-  // useEffect(() => {
-  //   setOpen(true);
-  //   hasClassSoon();
-  // }, []);
+  useEffect(() => {
+    setOpen(true);
+    hasClassSoon();
+  }, []);
 
-  // const logout = () => {
-  //   axios.get(`${config.BASE_PATH}endSession`)
-  //   .then(() => {
-  //     navigate('/')
-  //     return;
-  //   }).catch((err) => {
-  //     console.log(err);
-  //     navigate('/')
-  //     return;
-  //   })
-  // };
+  const logout = async () => {
+    try {
+      await axios.post(`${config.BASE_PATH}logout`, {}, {withCredentials: true})
+      navigate('/')
+    } catch (err) {
+      console.log(err)
+      alert("Logout failed. Please try again.")
+    }
+  };
 
-  // const hasClassSoon = () => {
-  //   axios.get(`${config.BASE_PATH}notification`).then((data) => {
-  //     setClassScheduledIn1hour(data.data);
-  //   });
-  // };
-
+  const hasClassSoon = () => {
+    axios.get(`${config.BASE_PATH}notification`).then((data) => {
+      setClassScheduledIn1hour(data.data);
+    });
+  };
 
   return (
     <div>
-      {/* <div className="side_nav">
+      <div className="side_nav">
         <Link to="/profile">Profile</Link>
         <Link to="/schedule">Schedule</Link>
         <Link to="/pastClass">Past Class</Link>
         <Link to="/" onClick={logout}>Logout</Link>
-      </div> */}
+      </div>
       {/* {open && classScheduledIn1hour.length > 0 && (
         <Alert
           severity="error"
