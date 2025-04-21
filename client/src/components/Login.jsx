@@ -15,15 +15,12 @@ const Login = () => {
     const username = form.get("username") || "";
     const password = form.get("password") || "";
 
-    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
-
     axios
       .post(`${config.BASE_PATH}login`, 
         { username, password },
         { withCredentials: true }
       )
       .then((data) => {
-        console.log('login data', data)
         navigate("/mainPage");
       })
       .catch((err) => {

@@ -4,8 +4,8 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 // import Profile from "./Profile.jsx";
 // import Schedule from "./Schedule.jsx";
 import Login from "./components/Login";
-// import Register from "./Register.jsx";
-import Home from "./components/Home";
+import Register from "./components/Register";
+import Home from './components/Home'
 import Entry from "./components/Entry";
 // import PastClass from "./PastClass.jsx";
 // import "./App.css";
@@ -33,7 +33,7 @@ const App = () => {
     <Routes>
       <Route path="/" element={<Entry />} />
       <Route path="/login" element={<Login />} />
-      {/* <Route path="/register" element={<Register />} /> */}
+      <Route path="/register" element={<Register />} />
       <Route path="/mainPage" element={<Home />} />
       {/* <Route
         path="/profile"

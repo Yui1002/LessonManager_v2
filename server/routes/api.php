@@ -12,4 +12,5 @@ use App\Http\Controllers\AuthController;
 // });
 
 Route::get('/checkIfLoggedIn', [AuthController::class, 'checkIfLoggedIn']);
-Route::post('/login', [AuthController::class, 'login']);    
+Route::post('/login', [AuthController::class, 'login']); 
+Route::post('/register', [AuthController::class, 'register']);
