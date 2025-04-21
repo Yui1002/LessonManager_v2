@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Managers\AuthManager;
 
-\Log::info('CORS headers applied');
-
 class AuthController {
     private $authManager;
 
@@ -17,9 +15,6 @@ class AuthController {
 
     public function checkIfLoggedIn(Request $request)
     {
-        \Log::info('Session Data:', $request->session()->all());
-        \Log::info('Session ID:', ['id' => session()->getId()]);
-
         if ($request->session()->has("user")) {
             return response()->json([
                 'loggedIn' => true,
@@ -32,18 +27,18 @@ class AuthController {
 
     public function login(Request $request) 
     {
-        // \Log::info('User logged in:', ['user' => $request->session()->get('user')]);
-        // \Log::info('Session Data After Login:', $request->session()->all());
         $user = $this->authManager->login($request);
         $request->session()->put('user', $user);
         
-
         return response()->json($user);
     }
 
     public function register(Request $request)
     {
-        $user = $this->authManager->register($request);
+        $this->authManager->register($request);
+        return response()->json([
+            'message' => 'Registered the user successfully',
+        ], 201);
     }
 
     public function logout(Request $request)
