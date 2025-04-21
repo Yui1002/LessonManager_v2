@@ -15,5 +15,6 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->append(StartSession::class);
+        
     })
     ->withExceptions(function (Exceptions $exceptions) {})->create();

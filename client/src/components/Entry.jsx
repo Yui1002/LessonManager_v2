@@ -12,7 +12,6 @@ const Entry = () => {
       const res = await axios.get(`${config.BASE_PATH}checkIfLoggedIn`, {
         withCredentials: true
       });
-      console.log('data', res)
       if (res.data.loggedIn) {
         navigate("/mainPage");
       } else {

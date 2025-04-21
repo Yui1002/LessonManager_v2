@@ -3,14 +3,12 @@
 namespace App\Repositories;
 
 use App\Database\Database;
-use PDO;
 
 class AuthRepository {
     private $db;
 
     public function __construct() {
         $this->db = Database::getInstance();
-
     }
 
     public function findByUsername($username) {

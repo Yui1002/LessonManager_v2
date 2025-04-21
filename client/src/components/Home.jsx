@@ -1,25 +1,13 @@
 import axios from "axios";
-import * as React from "react";
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import "../styles/Home.css";
-// import { IconButton, Alert } from "@mui/material";
-// import CloseIcon from "@mui/icons-material/Close";
 import { useNavigate } from 'react-router-dom';
+import "../styles/Home.css";
 import { config } from '../config';
+import SideNav from "./SideNav";
 
-const Home = (props) => {
-  // console.log("home props: ", props);
+const Home = () => {
   const navigate = useNavigate();
-  const [open, setOpen] = useState(false);
-  // const [classScheduledIn1hour, setClassScheduledIn1hour] = useState([]);
 
-  useEffect(() => {
-    setOpen(true);
-    hasClassSoon();
-  }, []);
-
-  const logout = async () => {
+  const onLogout = async () => {
     try {
       await axios.post(`${config.BASE_PATH}logout`, {}, {withCredentials: true})
       navigate('/')
@@ -29,39 +17,9 @@ const Home = (props) => {
     }
   };
 
-  const hasClassSoon = () => {
-    axios.get(`${config.BASE_PATH}notification`).then((data) => {
-      setClassScheduledIn1hour(data.data);
-    });
-  };
-
   return (
     <div>
-      <div className="side_nav">
-        <Link to="/profile">Profile</Link>
-        <Link to="/schedule">Schedule</Link>
-        <Link to="/pastClass">Past Class</Link>
-        <Link to="/" onClick={logout}>Logout</Link>
-      </div>
-      {/* {open && classScheduledIn1hour.length > 0 && (
-        <Alert
-          severity="error"
-          action={
-            <IconButton
-              aria-label="close"
-              color="inherit"
-              size="small"
-              onClick={() => {
-                setOpen(false);
-              }}
-            >
-            <CloseIcon fontSize="inherit" />
-            </IconButton>
-          }
-        >
-          {`Class starts within 1 hour with ${classScheduledIn1hour[0].name}`}
-        </Alert>
-      )} */}
+      <SideNav onLogout={onLogout} />
       <h1 className="home_title">Hello!</h1>
     </div>
   );
