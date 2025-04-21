@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 // import axios from "axios";
-// import Profile from "./Profile.jsx";
+import Profile from "./components/Profile";
 // import Schedule from "./Schedule.jsx";
 import Login from "./components/Login";
 import Register from "./components/Register";
@@ -35,10 +35,7 @@ const App = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/mainPage" element={<Home />} />
-      {/* <Route
-        path="/profile"
-        element={<Profile checkLogin={checkLogin} isLoggedIn={isLoggedIn} />}
-      /> */}
+      <Route path="/profile" element={<Profile />} />
       {/* <Route
         path="/schedule"
         element={<Schedule checkLogin={checkLogin} isLoggedIn={isLoggedIn} />}
